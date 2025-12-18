@@ -1,0 +1,8 @@
+.errorWrapper {
+    margin: 20px;
+}
+
+.errorDetails {
+    white-space: pre-wrap;
+    cursor: pointer;
+}

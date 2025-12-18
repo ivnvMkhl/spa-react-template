@@ -1,0 +1,11 @@
+{
+    "columns": {
+        "id": "ID",
+        "name": "Имя",
+        "username": "Имя пользователя",
+        "email": "Email",
+        "phone": "Телефон",
+        "city": "Город",
+        "company": "Компания"
+    }
+}

@@ -1,0 +1,149 @@
+templates:
+    page:
+        params:
+            - name: 'name'
+              prompt: 'Enter page name'
+            - name: 'path'
+              prompt: 'Enter path'
+        files:
+            main:
+                path: '{{ path }}/{{ name }}/{{ name }}.tsx'
+                template: |
+                    import { FC } from 'react';
+
+                    export const {{ name }}: FC = () => {
+                        return <></>;
+                    };
+            index:
+                path: '{{ path }}/{{ name }}/index.ts'
+                template: |
+                    export { {{ name }} } from './{{ name }}';
+
+            localization:
+                path: '{{ path }}/{{ name }}/{{ name }}.translate.ts'
+                template: |
+                    import { createTranslator } from '@shared/services/translate';
+
+                    import {{ name }}Ru from './{{ name }}.ru.json';
+                    export const t = createTranslator('pages', '{{ name }}', {{ name }}Ru);
+
+            localizationMap:
+                path: '{{ path }}/{{ name }}/{{ name }}.ru.json'
+                template: |
+                    {}
+    feature:
+        params:
+            - name: 'name'
+              prompt: 'Enter feature name'
+            - name: 'path'
+              prompt: 'Enter path'
+        files:
+            main:
+                path: '{{ path }}/{{ name }}/{{ name }}.tsx'
+                template: |
+                    import { reactionObserver } from '@shared/services/reaction';
+                    import { FC } from 'react';
+
+                    import { {{ name }}Controller } from './{{ name }}.controller';
+                    import { {{ name }}State } from './{{ name }}.state';
+
+                    type Props = {};
+
+                    const stateConstructor = (_: Props) => new {{ name }}State();
+                    const controllerConstructor = (state: {{ name }}State) => new {{ name }}Controller(state);
+
+                    export const {{ name }}: FC<Props> = reactionObserver(stateConstructor, controllerConstructor, ({ state }) => {
+                        return <></>;
+                    });
+
+            state:
+                path: '{{ path }}/{{ name }}/{{ name }}.state.ts'
+                template: |
+                    import { ObservableState } from '@shared/services/reaction';
+
+                    export class {{ name }}State extends ObservableState {
+                        constructor() {
+                            super();
+                            this.makeAutoObservable(this, {});
+                        }
+                    }
+
+            adapter:
+                path: '{{ path }}/{{ name }}/{{ name }}.controller.ts'
+                template: |
+                    import { type ControllerActionProps, ReactionController } from '@shared/services/reaction';
+
+                    import type { {{ name }}State } from './{{ name }}.state';
+
+                    type ActionPayload = {
+                        IDLE: null;
+                    };
+
+                    export class {{ name }}Controller extends ReactionController {
+                        constructor(private readonly state: {{ name }}State) {
+                            super();
+                            this.subscribe();
+                        }
+
+                        public readonly handleAction = async ({ type, payload }: ControllerActionProps<ActionPayload>) => {
+                            switch (type) {
+                                case 'IDLE': {
+                                    break;
+                                }
+                            }
+                        };
+
+                        private readonly subscribe = () => {
+                            this.reaction([() => this.state.isRendered], async () => {
+                                if (this.state.isRendered) {
+                                    this.state.isLoading = false;
+                                }
+                            });
+                        };
+                    }
+
+            adapterTest:
+                path: '{{ path }}/{{ name }}/{{ name }}.controller.test.ts'
+                template: |
+                    import { macroTick } from '@shared/services/test';
+                    import { beforeEach, describe, expect, it } from 'vitest';
+
+                    import { {{ name }}Controller } from './{{ name }}.controller';
+                    import { {{ name }}State } from './{{ name }}.state';
+
+                    describe('Проверка контроллера', () => {
+                        let state: {{ name }}State;
+
+                        beforeEach(() => {
+                            state = new {{ name }}State();
+                        });
+
+                        it('Создание инстанса контроллера', async () => {
+                            new {{ name }}Controller(state);
+
+                            state.isRendered = true;
+                            await macroTick();
+
+                            expect(state.isLoading).equal(false);
+                            expect(state.error).equal(undefined);
+                            expect(state.isRendered).equal(true);
+                        });
+                    });
+
+            index:
+                path: '{{ path }}/{{ name }}/index.ts'
+                template: |
+                    export { {{ name }} } from './{{ name }}';
+
+            localization:
+                path: '{{ path }}/{{ name }}/{{ name }}.translate.ts'
+                template: |
+                    import { createTranslator } from '@shared/services/translate';
+
+                    import {{ name }}Ru from './{{ name }}.ru.json';
+                    export const t = createTranslator('features', '{{ name }}', {{ name }}Ru);
+
+            localizationMap:
+                path: '{{ path }}/{{ name }}/{{ name }}.ru.json'
+                template: |
+                    {}
