@@ -8,20 +8,6 @@ export const appSectionsConfig: AppSectionsConfig = [
         path: '/',
         component: 'Main',
         isDynamic: false,
-        children: [
-            {
-                path: '/user-list',
-                component: 'UserList',
-                isDynamic: false,
-                children: [
-                    {
-                        path: '/user-list/:userId',
-                        component: 'User',
-                        isDynamic: true,
-                        children: [],
-                    },
-                ],
-            },
-        ],
+        children: [],
     },
 ];

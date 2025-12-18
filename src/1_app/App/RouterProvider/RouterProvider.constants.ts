@@ -1,10 +1,8 @@
-import { Main, User, UserList } from '@pages/index';
+import { Main } from '@pages/index';
 import { FC } from 'react';
 
 export const componentMap: Record<string, FC> = {
     Main,
-    User,
-    UserList,
 } as const;
 
 export type ComponentMapKey = keyof typeof componentMap;

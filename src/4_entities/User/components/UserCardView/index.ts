@@ -1,1 +1,0 @@
-export { UserCardView } from './UserCardView';
