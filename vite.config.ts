@@ -1,10 +1,11 @@
 import path from 'node:path';
 
 import react from '@vitejs/plugin-react';
+import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig } from 'vitest/config';
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
     resolve: {
         alias: {
             '@src': path.resolve(__dirname, './src'),
@@ -15,7 +16,15 @@ export default defineConfig({
             '@shared': path.resolve(__dirname, './src/5_shared'),
         },
     },
-    plugins: [react()],
+    plugins: [
+        react(),
+        mode === 'analyze' &&
+            visualizer({
+                filename: './dist/stats.html',
+                open: true,
+                gzipSize: true,
+            }),
+    ],
     server: {
         port: 3000,
     },
@@ -42,4 +51,4 @@ export default defineConfig({
             ],
         },
     },
-});
+}));

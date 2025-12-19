@@ -8,10 +8,10 @@
 
 ### Генерация Feature
 
-Для генерации feature модуля используется скрипт `create-feature`:
+Для генерации feature модуля используется скрипт `cr:feature`:
 
 ```bash
-npm run create-feature
+npm run cr:feature
 
 # Enter feature name: MyFeature
 # Enter path: ./src/3_features
@@ -20,7 +20,7 @@ npm run create-feature
 Или используйте параметризированную команду, которая не будет запрашивать диалог:
 
 ```bash
-npm run create-feature name=MyFeature
+npm run cr:feature name=MyFeature
 ```
 
 **Генерируемые файлы для feature:**
@@ -45,10 +45,10 @@ npm run create-feature name=MyFeature
 
 ### Генерация Page
 
-Для генерации page модуля используется скрипт `create-page`:
+Для генерации page модуля используется скрипт `cr:page`:
 
 ```bash
-npm run create-page
+npm run cr:page
 
 # Enter page name: MyPage
 # Enter path: ./src/2_pages
@@ -57,7 +57,7 @@ npm run create-page
 Или используйте параметризированную команду:
 
 ```bash
-npm run create-page name=MyPage
+npm run cr:page name=MyPage
 ```
 
 **Генерируемые файлы для page:**
@@ -92,7 +92,7 @@ npm run create-page name=MyPage
 ### Генерация feature с именем `UserProfile`
 
 ```bash
-npm run create-feature name=UserProfile
+npm run cr:feature name=UserProfile
 ```
 
 Создаст структуру:
@@ -110,7 +110,7 @@ src/3_features/UserProfile/
 ### Генерация page с именем `Settings`
 
 ```bash
-npm run create-page name=Settings
+npm run cr:page name=Settings
 ```
 
 Создаст структуру:
