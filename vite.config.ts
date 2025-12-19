@@ -23,5 +23,23 @@ export default defineConfig({
         environment: 'jsdom',
         globals: true,
         setupFiles: [path.resolve(__dirname, './src/5_shared/services/test/beforeScript.ts')],
+        coverage: {
+            provider: 'v8',
+            reporter: ['text', 'json', 'html'],
+            exclude: [
+                'node_modules/',
+                'dist/',
+                '**/*.test.{ts,tsx}',
+                '**/*.config.{ts,js}',
+                '**/index.ts',
+                '**/*.d.ts',
+                '**/*.translate.ts',
+                '**/*.constants.ts',
+                '**/*.interfaces.ts',
+                '**/*.tsx',
+                'public/',
+                'eslint-local-rules/',
+            ],
+        },
     },
 });

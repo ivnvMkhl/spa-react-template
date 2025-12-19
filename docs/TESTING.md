@@ -107,9 +107,9 @@ it('Навигация через handleAction', async () => {
     state.isRendered = true;
     await macroTick();
 
-    await controller.handleAction({ 
-        type: 'NAVIGATE_TO_USER', 
-        payload: { userId: 1 } 
+    await controller.handleAction({
+        type: 'NAVIGATE_TO_USER',
+        payload: { userId: 1 }
     });
 
     expect(mockPush).toHaveBeenCalledWith('/user-list/1');
@@ -231,6 +231,72 @@ npm test
 
 ```bash
 npm test -- src/3_features/UsersTable/UsersTable.controller.test.ts
+```
+
+## Покрытие кода тестами
+
+Проект использует **@vitest/coverage-v8** для анализа покрытия кода тестами.
+
+### Запуск тестов с покрытием
+
+```bash
+npm run test:coverage
+```
+
+Эта команда:
+- Запускает все тесты
+- Генерирует отчет о покрытии в консоли
+- Создает HTML отчет в директории `coverage/`
+- Создает JSON отчет для интеграции с CI/CD
+
+### Просмотр HTML отчета
+
+После запуска тестов с покрытием можно открыть HTML отчет:
+
+```bash
+npm run test:coverage:ui
+```
+
+Или вручную открыть файл `coverage/index.html` в браузере.
+
+### Метрики покрытия
+
+Отчет показывает следующие метрики:
+- **% Stmts** - процент покрытых операторов
+- **% Branch** - процент покрытых веток (if/else, switch и т.д.)
+- **% Funcs** - процент покрытых функций
+- **% Lines** - процент покрытых строк
+
+### Исключения из покрытия
+
+Следующие файлы автоматически исключаются из отчета о покрытии:
+- `node_modules/`
+- `dist/`
+- `**/*.test.{ts,tsx}` - файлы тестов
+- `**/*.config.{ts,js}` - конфигурационные файлы
+- `**/index.ts` - файлы-экспорты
+- `**/*.d.ts` - файлы определений TypeScript
+- `**/*.translate.ts` - файлы с декларацией модульных переводов
+- `**/*.constants.ts` - файлы с локальными константами
+- `**/*.interfaces.ts`- файлы с типами
+- `**/*.tsx` - React компоненты (presentation layer)
+- `public/` - Дериктория для статических файлов
+- `eslint-local-rules/` - Локальные правила eslint
+
+### Настройка покрытия
+
+Настройки покрытия находятся в `vite.config.ts` в секции `test.coverage`:
+
+```typescript
+test: {
+    coverage: {
+        provider: 'v8',
+        reporter: ['text', 'json', 'html'],
+        exclude: [
+            // список исключений
+        ],
+    },
+}
 ```
 
 ## Best Practices
