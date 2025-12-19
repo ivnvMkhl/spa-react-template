@@ -69,3 +69,4 @@ npm start
 - **[TESTING.md](./docs/TESTING.md)** - Правила и примеры написания тестов
 - **[LOCALIZATION.md](./docs/LOCALIZATION.md)** - Работа с локализацией
 - **[TEMPLATING.md](./docs/TEMPLATING.md)** - Генерация модулей через шаблоны
+- **[CODE_STYLE.md](./docs/CODE_STYLE.md)** - Руководство по стилю кода

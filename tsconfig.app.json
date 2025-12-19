@@ -28,12 +28,7 @@
             "@shared/*": ["./src/5_shared/*"]
         },
 
-        "plugins": [
-            {
-                "name": "@0no-co/graphqlsp",
-                "schema": "./schema.graphql"
-            }
-        ],
+        "plugins": [],
         "types": ["vitest/globals"]
     },
     "include": ["src"]
